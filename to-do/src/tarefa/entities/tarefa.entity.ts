@@ -1,5 +1,6 @@
+import { Categoria } from './../../categoria/entities/categoria.entity';
 import { IsNotEmpty, MaxLength } from 'class-validator'
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
 
 @Entity({name: 'tb_tarefa'}) // definindo o nome para o banco
 export class Tarefa { //criando a tabela
@@ -28,4 +29,9 @@ export class Tarefa { //criando a tabela
 
     @Column() //não é necessário passar nenhum valor 
     status: Boolean
+
+    @ManyToOne(() => Categoria, (categoria) => categoria.tarefas, {
+        onDelete: "CASCADE" //excluir tarefas que contém as categorias que foram excluidas automaticamente
+    })
+    categoria: Categoria
 }
