@@ -1,8 +1,10 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { DeleteResult } from "typeorm";
 import { Tarefa } from "../entities/tarefa.entity";
 import { TarefaService } from "../service/tarefa.service";
 
+@ApiTags('Tarefa') // separa as requições por entidades
 @Controller('/tarefa')
 export class TarefaController {
     constructor(private readonly service: TarefaService){}
@@ -25,6 +27,11 @@ export class TarefaController {
     @HttpCode(HttpStatus.OK)
     findByNome(@Param('nome') nome: string): Promise<Tarefa[]>{
         return this.service.findByNome(nome)
+    }
+    @Get('/responsavel/:responsavel')
+    @HttpCode(HttpStatus.OK)
+    findByResponsavel(@Param('responsavel') responsavel: string): Promise<Tarefa[]>{
+        return this.service.findByResponsavel(responsavel)
     }
 
     @Post()

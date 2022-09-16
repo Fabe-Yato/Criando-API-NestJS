@@ -44,6 +44,17 @@ export class TarefaService{
             }
         })
     }
+
+    async findByResponsavel(responsavel: string): Promise<Tarefa[]>{
+        return this.tarefaRepository.find({
+            where:{
+                responsavel: ILike(`%${responsavel}%`)
+            },
+            relations: {
+                categoria: true
+            }
+        })
+    }
     
     async create(tarefa: Tarefa): Promise<Tarefa>{
         return this.tarefaRepository.save(tarefa)

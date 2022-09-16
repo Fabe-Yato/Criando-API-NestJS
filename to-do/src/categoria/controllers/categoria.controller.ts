@@ -3,7 +3,9 @@ import { AppController } from "src/app.controller";
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { Categoria } from '../entities/categoria.entity';
 import { DeleteResult } from 'typeorm';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Categoria')
 @Controller('/categoria')
 export class categoriaController{
     constructor(private readonly service: CategoriaService){}

@@ -1,0 +1,1 @@
+web: npm run start:prod //Fazer o deploy do app
